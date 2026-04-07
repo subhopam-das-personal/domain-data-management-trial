@@ -5,7 +5,7 @@ Run this 30 minutes before the demo.
 
 - [ ] `cd /home/subhopam/Documents/Programming/thermofisher_ppd`
 - [ ] `streamlit run app.py` — confirm app loads, no import errors
-- [ ] Verify OPENAI_API_KEY is set: `cat .env | grep OPENAI_API_KEY`
+- [ ] Verify ANTHROPIC_API_KEY is set: `cat .env | grep ANTHROPIC_API_KEY`
 - [ ] Click "Analyze with PPD Intelligence Layer" for Patient A — confirm streaming works
 - [ ] Click for Patient B — confirm fallback still works if you unset the key temporarily
 - [ ] Check the Clario provenance line renders highlighted (yellow background) for Patient B

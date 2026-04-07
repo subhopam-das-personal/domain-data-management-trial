@@ -16,7 +16,7 @@ A 3-screen Streamlit demo that ingests a synthetic FHIR patient bundle against a
 ## Tech stack
 
 - Python 3.10 / Streamlit 1.31+ (`st.write_stream()` for LLM streaming)
-- OpenAI API (`gpt-4o`, streaming with pre-recorded fallback — demo cannot break)
+- Anthropic API (`claude-sonnet-4-6`, streaming with pre-recorded fallback — demo cannot break)
 - FHIR R4 synthetic patient JSON bundles with custom `ppd.com/fhir/ext/data-source` extension
 - NCT04736745 real eligibility criteria (QTc >470ms exclusion criterion)
 
@@ -25,7 +25,7 @@ A 3-screen Streamlit demo that ingests a synthetic FHIR patient bundle against a
 ```bash
 pip install -r requirements.txt
 cp .env.example .env
-# Add your OpenAI API key to .env
+# Add your Anthropic API key to .env
 streamlit run app.py
 ```
 

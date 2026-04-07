@@ -13,7 +13,7 @@ import sys
 import time
 from pathlib import Path
 
-import openai
+import anthropic
 import streamlit as st
 from dotenv import load_dotenv
 import os
@@ -242,28 +242,23 @@ def format_patient_for_prompt(patient_data: dict, patient_id: str) -> str:
     return "\n".join(lines)
 
 
-# ── OpenAI streaming generators ───────────────────────────────────────────────
+# ── Anthropic streaming generators ───────────────────────────────────────────
 
 def generate_stream(patient_data: dict, patient_id: str, criteria: str):
-    """Generator for live OpenAI streaming. Yields text tokens."""
-    api_key = os.getenv("OPENAI_API_KEY")
-    client = openai.OpenAI(api_key=api_key)
+    """Generator for live Anthropic streaming. Yields text tokens."""
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    client = anthropic.Anthropic(api_key=api_key)
     patient_text = format_patient_for_prompt(patient_data, patient_id)
     user_content = f"TRIAL CRITERIA:\n{criteria}\n\nPATIENT FHIR DATA:\n{patient_text}"
 
-    stream = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_content},
-        ],
-        stream=True,
-        timeout=30,
-    )
-    for chunk in stream:
-        content = chunk.choices[0].delta.content
-        if content:
-            yield content
+    with client.messages.stream(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": user_content}],
+    ) as stream:
+        for text in stream.text_stream:
+            yield text
 
 
 def generate_fallback(patient_id: str):
@@ -403,24 +398,24 @@ def main():
 
         with st.spinner("Querying Clario + Datavant signal libraries..."):
             # Pre-flight: missing API key goes straight to fallback, no error banner
-            if not os.getenv("OPENAI_API_KEY"):
+            if not os.getenv("ANTHROPIC_API_KEY"):
                 output = st.write_stream(generate_fallback(selected_id))
             else:
                 try:
                     output = st.write_stream(
                         generate_stream(patient_data, selected_id, TRIAL_CRITERIA)
                     )
-                except openai.AuthenticationError:
+                except anthropic.AuthenticationError:
                     st.error(
-                        "API key rejected — check OPENAI_API_KEY in .env and restart. "
+                        "API key rejected — check ANTHROPIC_API_KEY in .env and restart. "
                         "Showing pre-recorded analysis."
                     )
                     output = st.write_stream(generate_fallback(selected_id))
                 except (
-                    openai.APITimeoutError,
-                    openai.RateLimitError,
-                    openai.APIConnectionError,
-                    openai.APIStatusError,
+                    anthropic.APITimeoutError,
+                    anthropic.RateLimitError,
+                    anthropic.APIConnectionError,
+                    anthropic.APIStatusError,
                 ):
                     output = st.write_stream(generate_fallback(selected_id))
 
