@@ -1,0 +1,65 @@
+{
+  "resourceType": "Bundle",
+  "id": "patient-c-lin-chen",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-c",
+        "name": [{"use": "official", "family": "Chen", "given": ["Lin"]}],
+        "birthDate": "1979-06-05",
+        "gender": "female",
+        "extension": [
+          {
+            "url": "https://ppd.com/fhir/ext/data-source",
+            "valueString": "Datavant-linked"
+          },
+          {
+            "url": "https://ppd.com/fhir/ext/patient-backstory",
+            "valueString": "Software engineer from San Francisco, newly diagnosed with esophageal adenocarcinoma. Records are fragmented across three health systems — her Datavant-linked history fills gaps a local chart review would miss."
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-c-1",
+        "subject": {"reference": "Patient/patient-c"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "276807009",
+              "display": "Esophageal adenocarcinoma"
+            }
+          ]
+        },
+        "clinicalStatus": {"coding": [{"code": "active"}]},
+        "verificationStatus": {"coding": [{"code": "confirmed"}]},
+        "onsetDateTime": "2026-01-10",
+        "stage": [{"summary": {"coding": [{"display": "Stage II"}]}}]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-c-ecog",
+        "subject": {"reference": "Patient/patient-c"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "89247-1",
+              "display": "ECOG performance status"
+            }
+          ]
+        },
+        "valueInteger": 0,
+        "effectiveDateTime": "2026-03-28",
+        "status": "final"
+      }
+    }
+  ]
+}

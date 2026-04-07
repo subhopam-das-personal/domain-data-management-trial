@@ -1,0 +1,110 @@
+{
+  "resourceType": "Bundle",
+  "id": "patient-a-maria-santos",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-a",
+        "name": [{"use": "official", "family": "Santos", "given": ["Maria"]}],
+        "birthDate": "1968-03-14",
+        "gender": "female",
+        "extension": [
+          {
+            "url": "https://ppd.com/fhir/ext/data-source",
+            "valueString": "Datavant-linked"
+          },
+          {
+            "url": "https://ppd.com/fhir/ext/patient-backstory",
+            "valueString": "Former schoolteacher from Houston, diagnosed with Stage III esophageal adenocarcinoma 8 months ago. Motivated, adherent to prior chemotherapy, strong family support network."
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-a-1",
+        "subject": {"reference": "Patient/patient-a"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "276807009",
+              "display": "Esophageal adenocarcinoma"
+            }
+          ]
+        },
+        "clinicalStatus": {"coding": [{"code": "active"}]},
+        "verificationStatus": {"coding": [{"code": "confirmed"}]},
+        "onsetDateTime": "2025-08-01",
+        "stage": [{"summary": {"coding": [{"display": "Stage III"}]}}]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-a-qtc",
+        "subject": {"reference": "Patient/patient-a"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8634-5",
+              "display": "QTc interval"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 418,
+          "unit": "ms",
+          "system": "http://unitsofmeasure.org",
+          "code": "ms"
+        },
+        "effectiveDateTime": "2026-03-15",
+        "status": "final"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-a-ecog",
+        "subject": {"reference": "Patient/patient-a"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "89247-1",
+              "display": "ECOG performance status"
+            }
+          ]
+        },
+        "valueInteger": 1,
+        "effectiveDateTime": "2026-03-15",
+        "status": "final"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "med-a-1",
+        "subject": {"reference": "Patient/patient-a"},
+        "status": "stopped",
+        "intent": "order",
+        "medication": {
+          "concept": {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "1011815",
+                "display": "Carboplatin"
+              }
+            ]
+          }
+        },
+        "dosageInstruction": [{"text": "Prior neoadjuvant regimen, completed 2025-11-30"}]
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "resourceType": "Bundle",
+  "id": "patient-b-james-okafor",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-b",
+        "name": [{"use": "official", "family": "Okafor", "given": ["James"]}],
+        "birthDate": "1954-09-22",
+        "gender": "male",
+        "extension": [
+          {
+            "url": "https://ppd.com/fhir/ext/data-source",
+            "valueString": "Clario-linked"
+          },
+          {
+            "url": "https://ppd.com/fhir/ext/patient-backstory",
+            "valueString": "Retired engineer from Chicago with Stage II esophageal squamous cell carcinoma and a 15-year history of antiarrhythmic therapy. His cardiac history flags elevated dropout risk based on Clario endpoint patterns."
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-b-1",
+        "subject": {"reference": "Patient/patient-b"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "363402007",
+              "display": "Esophageal squamous cell carcinoma"
+            }
+          ]
+        },
+        "clinicalStatus": {"coding": [{"code": "active"}]},
+        "verificationStatus": {"coding": [{"code": "confirmed"}]},
+        "onsetDateTime": "2025-10-15",
+        "stage": [{"summary": {"coding": [{"display": "Stage II"}]}}]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-b-2",
+        "subject": {"reference": "Patient/patient-b"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "195080001",
+              "display": "Atrial fibrillation"
+            }
+          ]
+        },
+        "clinicalStatus": {"coding": [{"code": "active"}]},
+        "verificationStatus": {"coding": [{"code": "confirmed"}]},
+        "onsetDateTime": "2011-04-01"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-b-qtc",
+        "subject": {"reference": "Patient/patient-b"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8634-5",
+              "display": "QTc interval"
+            }
+          ]
+        },
+        "valueQuantity": {
+          "value": 491,
+          "unit": "ms",
+          "system": "http://unitsofmeasure.org",
+          "code": "ms"
+        },
+        "effectiveDateTime": "2026-03-20",
+        "status": "final"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-b-ecog",
+        "subject": {"reference": "Patient/patient-b"},
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "89247-1",
+              "display": "ECOG performance status"
+            }
+          ]
+        },
+        "valueInteger": 2,
+        "effectiveDateTime": "2026-03-20",
+        "status": "final"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "med-b-1",
+        "subject": {"reference": "Patient/patient-b"},
+        "status": "active",
+        "intent": "order",
+        "medication": {
+          "concept": {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "68139",
+                "display": "Amiodarone"
+              }
+            ]
+          }
+        },
+        "dosageInstruction": [{"text": "200mg daily — QTc-prolonging antiarrhythmic, ongoing"}]
+      }
+    }
+  ]
+}
