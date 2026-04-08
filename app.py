@@ -306,20 +306,20 @@ def highlight_provenance(output: str) -> str:
 
 def render_eligibility_badge(eligibility: str | None):
     if eligibility == "ELIGIBLE":
-        st.success("ELIGIBLE", icon="")
+        st.success("ELIGIBLE")
     elif eligibility == "INELIGIBLE":
-        st.error("INELIGIBLE", icon="")
+        st.error("INELIGIBLE")
     else:
         st.info("Eligibility: Pending analysis")
 
 
 def render_risk_badge(risk: str | None):
     if risk == "HIGH RISK":
-        st.error("HIGH RISK", icon="")
+        st.error("HIGH RISK")
     elif risk == "MEDIUM RISK":
-        st.warning("MEDIUM RISK", icon="")
+        st.warning("MEDIUM RISK")
     elif risk == "LOW RISK":
-        st.success("LOW RISK", icon="")
+        st.success("LOW RISK")
     else:
         st.info("Retention Risk: Pending analysis")
 
@@ -329,7 +329,7 @@ def render_risk_badge(risk: str | None):
 def main():
     st.set_page_config(
         page_title="PPD Clinical Intelligence Layer",
-        page_icon="",
+        page_icon="🧬",
         layout="wide",
     )
 
