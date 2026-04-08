@@ -1,6 +1,10 @@
 # Domain Data Management Trial
 ### PPD Clinical Intelligence Layer — Demo
 
+**[Live demo](https://domain-data-management-trial-production.up.railway.app)** | **[Demo walkthrough script](DEMO_SCRIPT.md)**
+
+---
+
 Clinical trial enrollment delays cost ~$500k/day in late-phase oncology. Manual chart review takes 2-3 weeks per patient. Dropout risk isn't assessed until someone actually drops out.
 
 This prototype shows how PPD's proprietary data assets can screen patients in 90 seconds.
@@ -17,6 +21,16 @@ This prototype shows how PPD's proprietary data assets can screen patients in 90
 > *"Cardiac endpoint signal from Clario trial database (n=10,000+ trials) — not available to generic AI tools."*
 
 That sentence is the whole demo. IQVIA has volume. Generic AI tools have reasoning. Only PPD can assess cardiac dropout risk from 10,000 actual trial endpoints.
+
+---
+
+## Screenshots
+
+**Screen 2 — The Wow Moment (Patient B, James Okafor):**
+![Analysis — Patient B INELIGIBLE with Clario provenance signal](docs/screen2_analysis_patientB.png)
+
+**Screen 3 — Site Matching:**
+![Site Match Recommendations powered by Datavant](docs/screen3_site_matching.png)
 
 ---
 
